@@ -31,3 +31,26 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Application Configuration ###
+src/main/resources/application-local.yaml
+src/main/resources/application-test.yaml
+
+### Environment Variables ###
+.env
+
+### Logs ###
+*.log
+logs/
+
+### Database ###
+*.db
+*.sqlite
+
+### OS ###
+.DS_Store
+Thumbs.db
+
+### Temporary Files ###
+*.tmp
+*.temp
