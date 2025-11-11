@@ -10,5 +10,6 @@ public interface UtilisateurMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "dateCreation", expression = "java(java.time.LocalDateTime.now())")
+    @Mapping(target = "comptes", ignore = true)
     Utilisateur toEntity(UtilisateurRequestDTO dto);
 }

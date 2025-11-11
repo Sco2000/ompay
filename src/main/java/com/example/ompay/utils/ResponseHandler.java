@@ -23,4 +23,9 @@ public class ResponseHandler {
     public static ResponseEntity<ApiResponse<Object>> error(String message) {
         return error(message, HttpStatus.BAD_REQUEST);
     }
+
+    public static <T> ResponseEntity<ApiResponse<T>> error(String message, T data, HttpStatus status) {
+        ApiResponse<T> response = new ApiResponse<>(false, message, data);
+        return new ResponseEntity<>(response, status);
+    }
 }

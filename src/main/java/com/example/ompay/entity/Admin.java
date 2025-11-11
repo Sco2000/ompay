@@ -2,6 +2,8 @@ package com.example.ompay.entity;
 
 import jakarta.persistence.*;
 import java.util.UUID;
+import lombok.Data;
+
 
 /**
  * Entity representing an administrator in the system.
@@ -9,6 +11,7 @@ import java.util.UUID;
  * Each Admin has a unique UUID identifier, a unique login, and a password.
  * </p>
  */
+@Data
 @Entity
 @Table(name="admins")
 public class Admin {
@@ -49,38 +52,38 @@ public class Admin {
         this.password = password;
     }
 
-    /**
-     * Retourne l'identifiant unique de l'administrateur.
-     * 
-     * @return UUID de l'administrateur.
-     */
-    public UUID getId() { return id; }
+    // /**
+    //  * Retourne l'identifiant unique de l'administrateur.
+    //  * 
+    //  * @return UUID de l'administrateur.
+    //  */
+    // public UUID getId() { return id; }
 
-    /**
-     * Retourne le nom d'utilisateur de l'administrateur.
-     * 
-     * @return login de l'administrateur.
-     */
-    public String getLogin() { return login; }
+    // /**
+    //  * Retourne le nom d'utilisateur de l'administrateur.
+    //  * 
+    //  * @return login de l'administrateur.
+    //  */
+    // public String getLogin() { return login; }
 
-    /**
-     * Définit le nom d'utilisateur de l'administrateur.
-     * 
-     * @param login Nouveau nom d'utilisateur.
-     */
-    public void setLogin(String login) { this.login = login; }
+    // /**
+    //  * Définit le nom d'utilisateur de l'administrateur.
+    //  * 
+    //  * @param login Nouveau nom d'utilisateur.
+    //  */
+    // public void setLogin(String login) { this.login = login; }
 
-    /**
-     * Retourne le mot de passe de l'administrateur.
-     * 
-     * @return Mot de passe de l'administrateur.
-     */
-    public String getPassword() { return password; }
+    // /**
+    //  * Retourne le mot de passe de l'administrateur.
+    //  * 
+    //  * @return Mot de passe de l'administrateur.
+    //  */
+    // public String getPassword() { return password; }
 
-    /**
-     * Définit le mot de passe de l'administrateur.
-     * 
-     * @param password Nouveau mot de passe.
-     */
-    public void setPassword(String password) { this.password = password; }
+    // /**
+    //  * Définit le mot de passe de l'administrateur.
+    //  * 
+    //  * @param password Nouveau mot de passe.
+    //  */
+    // public void setPassword(String password) { this.password = password; }
 }

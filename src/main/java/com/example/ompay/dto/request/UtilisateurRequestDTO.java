@@ -1,11 +1,22 @@
 package com.example.ompay.dto.request;
 
 import java.time.LocalDate;
+import jakarta.validation.constraints.*;
+
 
 public class UtilisateurRequestDTO {
+
+    @NotBlank(message = "Le prénom est obligatoire")
     private String prenom;
+
+    @NotBlank(message = "Le nom est obligatoire")
     private String nom;
+
+    @Email(message = "L'adresse email est invalide")
     private String email;
+
+    @NotBlank(message = "Le CIN est obligatoire")
+    @Size(min = 13, max = 13, message = "Le CIN doit contenir exactement 13 caractères")
     private String cin;
     private String adresse;
     private LocalDate dateDeNaissance;

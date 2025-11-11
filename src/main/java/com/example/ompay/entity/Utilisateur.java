@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.util.UUID;
 import java.util.List;
+import lombok.Data;
 
 /**
  * Represents a user entity in the system.
@@ -12,6 +13,8 @@ import java.util.List;
  *
  * @Entity JPA entity representing a user table in the database
  */
+
+@Data
 @Entity
 @Table(name="utilisateurs")
 public class Utilisateur {
@@ -99,79 +102,79 @@ public class Utilisateur {
     }
 
     // Getters and Setters documentation
-    /**
-     * @return The unique identifier of the user
-     */
-    public UUID getId() { return id; }
+    // /**
+    //  * @return The unique identifier of the user
+    //  */
+    // public UUID getId() { return id; }
 
-    /**
-     * @return The last name of the user
-     */
-    public String getNom() { return nom; }
+    // /**
+    //  * @return The last name of the user
+    //  */
+    // public String getNom() { return nom; }
 
-    /**
-     * @param nom The last name to set
-     */
-    public void setNom(String nom) { this.nom = nom; }
+    // /**
+    //  * @param nom The last name to set
+    //  */
+    // public void setNom(String nom) { this.nom = nom; }
 
-    /**
-     * @return The first name of the user
-     */
-    public String getPrenom() { return prenom; }
+    // /**
+    //  * @return The first name of the user
+    //  */
+    // public String getPrenom() { return prenom; }
 
-    /**
-     * @param prenom The first name to set
-     */
-    public void setPrenom(String prenom) { this.prenom = prenom; }
+    // /**
+    //  * @param prenom The first name to set
+    //  */
+    // public void setPrenom(String prenom) { this.prenom = prenom; }
 
-    /**
-     * @return The email address of the user
-     */
-    public String getEmail() { return email; }
+    // /**
+    //  * @return The email address of the user
+    //  */
+    // public String getEmail() { return email; }
 
-    /**
-     * @param email The email address to set
-     */
-    public void setEmail(String email) { this.email = email; }
+    // /**
+    //  * @param email The email address to set
+    //  */
+    // public void setEmail(String email) { this.email = email; }
 
-    /**
-     * @return The identity number of the user
-     */
-    public String getCin() { return cin; }
+    // /**
+    //  * @return The identity number of the user
+    //  */
+    // public String getCin() { return cin; }
 
-    /**
-     * @param cin The identity number to set
-     */
-    public void setCin(String cin) { this.cin = cin; }
+    // /**
+    //  * @param cin The identity number to set
+    //  */
+    // public void setCin(String cin) { this.cin = cin; }
 
-     /**
-     * @return The adress of the user
-     */
-    public String getAdresse() { return adresse; }
+    //  /**
+    //  * @return The adress of the user
+    //  */
+    // public String getAdresse() { return adresse; }
 
-    /**
-     * @param adresse The adress to set
-     */
-    public void setAdresse(String adresse) { this.adresse = adresse; }
+    // /**
+    //  * @param adresse The adress to set
+    //  */
+    // public void setAdresse(String adresse) { this.adresse = adresse; }
 
-    /**
-     * @return The date of birth of the user
-     */
-    public LocalDate getDateDeNaissance() { return dateDeNaissance; }
+    // /**
+    //  * @return The date of birth of the user
+    //  */
+    // public LocalDate getDateDeNaissance() { return dateDeNaissance; }
 
-    /**
-     * @param dateDeNaissance The date of birth to set
-     */
-    public void setDateDeNaissance(LocalDate dateDeNaissance) { this.dateDeNaissance = dateDeNaissance; }
+    // /**
+    //  * @param dateDeNaissance The date of birth to set
+    //  */
+    // public void setDateDeNaissance(LocalDate dateDeNaissance) { this.dateDeNaissance = dateDeNaissance; }
 
-    /**
-     * @return The creation timestamp of the user
-     */
-    public LocalDateTime getDateCreation() { return dateCreation; }
+    // /**
+    //  * @return The creation timestamp of the user
+    //  */
+    // public LocalDateTime getDateCreation() { return dateCreation; }
 
-    /**
-     * @param dateCreation The creation timestamp to set
-     */
-    public void setDateCreation(LocalDateTime dateCreation) { this.dateCreation = dateCreation; }
+    // /**
+    //  * @param dateCreation The creation timestamp to set
+    //  */
+    // public void setDateCreation(LocalDateTime dateCreation) { this.dateCreation = dateCreation; }
 
 }

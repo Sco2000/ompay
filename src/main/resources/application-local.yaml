@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://dpg-d47k0g6mcj7s73demmag-a.frankfurt-postgres.render.com:5432/ompaymobile_ousmane_marra
+    username: ompaymobile_ousmane_marra_user
+    password: JG6WmsLNCs2HhysWDGRRajVpXR6N3woq
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

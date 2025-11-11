@@ -6,7 +6,9 @@ import com.example.ompay.entity.enums.StatutCompte;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "comptes")
 public class Compte {
@@ -44,36 +46,36 @@ public class Compte {
 
     public Compte() {}
 
-    public UUID getId() { return id; }
-    public void setId(UUID id) { this.id = id; }
+    // public UUID getId() { return id; }
+    // public void setId(UUID id) { this.id = id; }
 
-    public String getTelephone() { return telephone; }
-    public void setTelephone(String telephone) { this.telephone = telephone; }
+    // public String getTelephone() { return telephone; }
+    // public void setTelephone(String telephone) { this.telephone = telephone; }
 
-    public String getCodeConnexion() { return codeConnexion; }
-    public void setCodeConnexion(String codeConnexion) { this.codeConnexion = codeConnexion; }
+    // public String getCodeConnexion() { return codeConnexion; }
+    // public void setCodeConnexion(String codeConnexion) { this.codeConnexion = codeConnexion; }
 
-    public TypeClient getTypeClient() { return typeClient; }
-    public void setTypeClient(TypeClient typeClient) { this.typeClient = typeClient; }
+    // public TypeClient getTypeClient() { return typeClient; }
+    // public void setTypeClient(TypeClient typeClient) { this.typeClient = typeClient; }
 
-    public StatutCompte getStatut() { return statut; }
-    public void setStatut(StatutCompte statut) { this.statut = statut; }
+    // public StatutCompte getStatut() { return statut; }
+    // public void setStatut(StatutCompte statut) { this.statut = statut; }
 
-    public String getMotifSuspension() { return motifSuspension; }
-    public void setMotifSuspension(String motifSuspension) { this.motifSuspension = motifSuspension; }
+    // public String getMotifSuspension() { return motifSuspension; }
+    // public void setMotifSuspension(String motifSuspension) { this.motifSuspension = motifSuspension; }
 
-    public String getCodeMarchand() { return codeMarchand; }
-    public void setCodeMarchand(String codeMarchand) { this.codeMarchand = codeMarchand; }
+    // public String getCodeMarchand() { return codeMarchand; }
+    // public void setCodeMarchand(String codeMarchand) { this.codeMarchand = codeMarchand; }
 
-    public String getQrCode() { return qrCode; }
-    public void setQrCode(String qrCode) { this.qrCode = qrCode; }
+    // public String getQrCode() { return qrCode; }
+    // public void setQrCode(String qrCode) { this.qrCode = qrCode; }
 
-    public LocalDateTime getDateCreation() { return dateCreation; }
-    public void setDateCreation(LocalDateTime dateCreation) { this.dateCreation = dateCreation; }
+    // public LocalDateTime getDateCreation() { return dateCreation; }
+    // public void setDateCreation(LocalDateTime dateCreation) { this.dateCreation = dateCreation; }
 
-    public Utilisateur getUtilisateur() { return utilisateur; }
-    public void setUtilisateur(Utilisateur utilisateur) { this.utilisateur = utilisateur; }
+    // public Utilisateur getUtilisateur() { return utilisateur; }
+    // public void setUtilisateur(Utilisateur utilisateur) { this.utilisateur = utilisateur; }
 
-    public Double getSolde() {return solde;}
-    public void setSolde(Double solde) {this.solde = solde;}
+    // public Double getSolde() {return solde;}
+    // public void setSolde(Double solde) {this.solde = solde;}
 }

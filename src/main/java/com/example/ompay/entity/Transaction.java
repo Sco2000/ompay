@@ -6,7 +6,9 @@ import com.example.ompay.entity.enums.StatutTransaction;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "transactions")
 public class Transaction {
@@ -35,24 +37,24 @@ public class Transaction {
 
     public Transaction() {}
 
-    public UUID getId() { return id; }
-    public void setId(UUID id) { this.id = id; }
+    // public UUID getId() { return id; }
+    // public void setId(UUID id) { this.id = id; }
 
-    public Double getMontant() { return montant; }
-    public void setMontant(Double montant) { this.montant = montant; }
+    // public Double getMontant() { return montant; }
+    // public void setMontant(Double montant) { this.montant = montant; }
 
-    public TypeTransaction getType() { return type; }
-    public void setType(TypeTransaction type) { this.type = type; }
+    // public TypeTransaction getType() { return type; }
+    // public void setType(TypeTransaction type) { this.type = type; }
 
-    public LocalDateTime getDateCreation() { return dateCreation; }
-    public void setDateCreation(LocalDateTime dateCreation) { this.dateCreation = dateCreation; }
+    // public LocalDateTime getDateCreation() { return dateCreation; }
+    // public void setDateCreation(LocalDateTime dateCreation) { this.dateCreation = dateCreation; }
 
-    public StatutTransaction getStatut() { return statut; }
-    public void setStatut(StatutTransaction statut) { this.statut = statut; }
+    // public StatutTransaction getStatut() { return statut; }
+    // public void setStatut(StatutTransaction statut) { this.statut = statut; }
 
-    public Compte getCompteSource() { return compteSource; }
-    public void setCompteSource(Compte compteSource) { this.compteSource = compteSource; }
+    // public Compte getCompteSource() { return compteSource; }
+    // public void setCompteSource(Compte compteSource) { this.compteSource = compteSource; }
 
-    public Compte getCompteDestination() { return compteDestination; }
-    public void setCompteDestination(Compte compteDestination) { this.compteDestination = compteDestination; }
+    // public Compte getCompteDestination() { return compteDestination; }
+    // public void setCompteDestination(Compte compteDestination) { this.compteDestination = compteDestination; }
 }

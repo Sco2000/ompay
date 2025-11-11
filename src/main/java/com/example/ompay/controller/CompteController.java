@@ -8,6 +8,8 @@ import com.example.ompay.entity.Compte;
 import com.example.ompay.mapper.CompteMapper;
 import com.example.ompay.service.CompteService;
 import com.example.ompay.utils.ResponseHandler;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,18 +56,27 @@ public class CompteController
         return ResponseHandler.success("Compte récupéré avec succès", dto, HttpStatus.OK);
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<?> getMonCompte(@AuthenticationPrincipal Compte compteConnecte) {
+        if (compteConnecte == null) {
+            return ResponseHandler.error("Utilisateur non authentifié", HttpStatus.UNAUTHORIZED);
+        }
+
+        // On récupère le compte complet depuis la base
+        Compte compte = compteService.getCompteByTelephone(compteConnecte.getTelephone())
+                .orElseThrow(() -> new RuntimeException("Compte non trouvé"));
+
+        CompteResponseDTO dto = compteMapper.toResponseDTO(compte);
+
+        return ResponseHandler.success("Compte récupéré avec succès", dto, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> createCompte(@Valid @RequestBody CompteRequestDTO dto)
     {
-        try {
         Compte compte = compteMapper.toEntity(dto);
         Compte saved = compteService.createCompte(compte);
         CompteResponseDTO response = compteMapper.toResponseDTO(saved);
         return ResponseHandler.success("Compte créé avec succès", response, HttpStatus.CREATED);
-    } catch (RuntimeException e) {
-        return ResponseHandler.error(e.getMessage(), HttpStatus.BAD_REQUEST);
-    } catch (Exception e) {
-        return ResponseHandler.error("Une erreur interne s'est produite", HttpStatus.INTERNAL_SERVER_ERROR);
-    }
     }
 }

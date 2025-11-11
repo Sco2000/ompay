@@ -1,0 +1,29 @@
+compte:
+  creation:
+    success: "Account created successfully"
+    telephone_exists: "This phone number is already associated with an account!"
+    cin_required: "User's CIN cannot be null or empty!"
+  retrieval:
+    list_success: "Account list retrieved successfully"
+    single_success: "Account retrieved successfully"
+    not_found: "Account not found"
+  validation:
+    telephone_required: "Phone number is required"
+    code_connexion_required: "Connection code is required"
+    code_connexion_length: "Connection code must be 4 digits"
+    utilisateur_required: "User information is required"
+
+utilisateur:
+  validation:
+    prenom_required: "First name is required"
+    nom_required: "Last name is required"
+    email_invalid: "Email address is invalid"
+    cin_required: "CIN is required"
+    cin_length: "CIN must contain exactly 13 characters"
+
+validation:
+  error: "Validation error"
+
+general:
+  internal_error: "An internal error occurred"
+  welcome: "Welcome to your Spring Boot API 🚀"
