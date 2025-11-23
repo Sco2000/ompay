@@ -7,8 +7,10 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString(exclude = {"compteSource", "compteDestination"})
 @Entity
 @Table(name = "transactions")
 public class Transaction {
@@ -18,6 +20,8 @@ public class Transaction {
     private UUID id;
 
     private Double montant;
+    private Double frais;
+    private Double montantTotal;
 
     @Enumerated(EnumType.STRING)
     private TypeTransaction type;

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ompay-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ompay
+  template:
+    metadata:
+      labels:
+        app: ompay
+    spec:
+      containers:
+        - name: ompay
+          image: ompay:1.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: TWILIO_ACCOUNT_SID
+              value: "AC718e89b8ca602d073792f9b83f930d61"
+            - name: TWILIO_AUTH_TOKEN
+              value: "84e2f7bcc36f998a4fd7ce71dfe3db3f"
+            - name: TWILIO_PHONE_NUMBER
+              value: "+18123987742"
+            

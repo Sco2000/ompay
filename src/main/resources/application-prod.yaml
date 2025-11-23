@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://${DB_HOST:prod-db-server}:5432/ompay
     username: ${DB_USER}
-    password: ${DB_PASS}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: none
@@ -10,3 +10,8 @@ spring:
 
 app:
   base-url: https://api.ompay.sn
+
+twilio:
+  accountSid: ${TWILIO_ACCOUNT_SID}
+  authToken: ${TWILIO_AUTH_TOKEN}
+  phoneNumber: ${TWILIO_PHONE_NUMBER}

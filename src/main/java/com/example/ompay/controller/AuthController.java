@@ -3,17 +3,13 @@ package com.example.ompay.controller;
 import com.example.ompay.dto.request.*;
 import com.example.ompay.dto.response.ApiResponse;
 import com.example.ompay.dto.response.AuthResponseDTO;
-// import com.example.ompay.dto.response.AuthResponseDTO;
 import com.example.ompay.dto.response.OtpValidationResponseDTO;
 import com.example.ompay.dto.response.PhoneResponseDTO;
 import com.example.ompay.service.AuthService;
-// import com.example.ompay.service.CompteService;
-// import com.example.ompay.service.JwtService;
-import com.example.ompay.utils.ResponseHandler;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseCookie;
-import org.springframework.http.ResponseEntity;
+import com.example.ompay.service.TokenBlacklistService;
+// import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.web.bind.annotation.*;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Map;
 
@@ -23,24 +19,26 @@ import java.util.Map;
 public class AuthController {
 
     private final AuthService authService;
+    private final TokenBlacklistService tokenBlacklistService;
     // private final JwtService jwtService;
     // private final CompteService compteService;
 
-    public AuthController(AuthService authService) {
+    public AuthController(AuthService authService, TokenBlacklistService tokenBlacklistService) {
         this.authService = authService;
+        this.tokenBlacklistService = tokenBlacklistService;
         // this.jwtService = jwtService;
         // this.compteService = compteService;
     }
 
     @PostMapping("/send-otp")
-    public ResponseEntity<?> sendOtp(@RequestBody PhoneRequestDTO dto) {
+    public ApiResponse<?> sendOtp(@RequestBody PhoneRequestDTO dto) {
         authService.generateOtp(dto.getTelephone()); // génère et envoie le code
         PhoneResponseDTO response = new PhoneResponseDTO(dto.getTelephone(), "OTP envoyé avec succès");
-        return ResponseHandler.success(response.getMessage(), response);
+        return ApiResponse.success(response.getMessage(), response);
     }
 
     @PostMapping("/validate-otp")
-    public ResponseEntity<?> validateOtp(@RequestBody OtpValidationDTO dto) {
+    public ApiResponse<?> validateOtp(@RequestBody OtpValidationDTO dto) {
         boolean isValid = authService.validateOtp(dto.getTelephone(), dto.getOtp());
         OtpValidationResponseDTO response = new OtpValidationResponseDTO(
             dto.getTelephone(), 
@@ -48,39 +46,30 @@ public class AuthController {
         );
 
         if (isValid) {
-            return ResponseHandler.success(response.getMessage(), response);
+            return ApiResponse.success(response.getMessage(), response);
         } else {
-            return ResponseHandler.error(response.getMessage(), HttpStatus.UNAUTHORIZED);
+            return ApiResponse.error(response.getMessage());
         }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> validatePin(@RequestBody PinRequestDTO request) {
+    public ApiResponse<?> validatePin(@RequestBody PinRequestDTO request) {
         Map<String, String> tokens = authService.validatePin(request.getTelephone(), request.getCodeConnexion());
 
         String accessToken = tokens.get("accessToken");
         String refreshToken = tokens.get("refreshToken");
 
-        // Création des cookies sécurisés
-        ResponseCookie accessCookie = ResponseCookie.from("access_token", accessToken)
-                .httpOnly(true)
-                .secure(true) // mettre false en local si besoin
-                .path("/")
-                .sameSite("Strict")
-                .maxAge(15 * 60) // 15 min
-                .build();
+        AuthResponseDTO authResponse = new AuthResponseDTO(accessToken, refreshToken);
 
-        ResponseCookie refreshCookie = ResponseCookie.from("refresh_token", refreshToken)
-                .httpOnly(true)
-                .secure(true)
-                .path("/")
-                .sameSite("Strict")
-                .maxAge(7 * 24 * 60 * 60) // 7 jours
-                .build();
-
-        return ResponseEntity.ok()
-                .header("Set-Cookie", accessCookie.toString())
-                .header("Set-Cookie", refreshCookie.toString())
-                .body(ResponseHandler.success("Connexion réussie", null, HttpStatus.OK).getBody());
+        return ApiResponse.success("Connexion réussie", authResponse);
+    }
+    @PostMapping("/logout")
+    public ApiResponse<?> logout(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            String token = authorizationHeader.substring(7);
+            tokenBlacklistService.blacklistToken(token);
+        }
+        return ApiResponse.success("Déconnexion réussie", null);
     }
 }

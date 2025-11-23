@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.ompay.entity.Compte;
 import com.example.ompay.utils.JwtUtils;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,12 +14,15 @@ import java.util.Random;
 public class AuthService {
 
     private final CompteService compteService;
+    @Qualifier("TwilioService")
+    private final INotificationService iNotificationService;
     private final Map<String, String> otpCache = new HashMap<>(); 
     private final JwtUtils jwtUtils;
 
-    public AuthService(CompteService compteService, JwtUtils jwtUtils) {
+    public AuthService(CompteService compteService, JwtUtils jwtUtils, INotificationService iNotificationService) {
         this.compteService = compteService;
         this.jwtUtils = jwtUtils;
+        this.iNotificationService = iNotificationService;
     }
 
     // Génération OTP
@@ -28,6 +32,7 @@ public class AuthService {
 
         String otp = String.valueOf(new Random().nextInt(9000) + 1000);
         otpCache.put(telephone, otp);
+        // iNotificationService.send("+221"+telephone, otp);
         System.out.println("OTP pour " + telephone + " : " + otp);
         return otp;
     }
@@ -45,7 +50,8 @@ public class AuthService {
     public Map<String, String> validatePin(String telephone, String pin) {
         Compte compte = compteService.getCompteByTelephone(telephone)
         .orElseThrow(() -> new RuntimeException("Compte non trouvé"));
-        if (!compte.getCodeConnexion().equals(pin)) {
+        System.out.println("Code: " + compte.getCodeConnexion());
+        if (!compte.getCodeConnexion().equals( pin)) {
             throw new RuntimeException("PIN incorrect !");
         }
 

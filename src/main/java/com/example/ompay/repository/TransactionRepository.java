@@ -12,4 +12,5 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID>
 {
     List<Transaction> findByCompteSource(Compte comte);
     List<Transaction> findByCompteDestination(Compte comte);
+    List<Transaction> findByCompteSourceOrCompteDestination(Compte source, Compte destination);
 }

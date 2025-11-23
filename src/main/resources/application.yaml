@@ -2,10 +2,13 @@ spring:
   application:
     name: ompay
   profiles:
-    active: prod  # Par défaut : mode local
+    active: local # Par défaut : mode local
   messages:
     basename: i18n/messages
     encoding: UTF-8
 
 server:
   port: 8080
+
+springdoc:
+  packages-to-scan: com.example.ompay.controller

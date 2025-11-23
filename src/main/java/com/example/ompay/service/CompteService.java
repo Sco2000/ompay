@@ -5,6 +5,7 @@ import com.example.ompay.entity.Transaction;
 import com.example.ompay.entity.Utilisateur;
 import com.example.ompay.entity.enums.StatutCompte;
 import com.example.ompay.entity.enums.StatutTransaction;
+import com.example.ompay.entity.enums.TypeClient;
 import com.example.ompay.repository.CompteRepository;
 import com.example.ompay.repository.TransactionRepository;
 import com.example.ompay.repository.UtilisateurRepository;
@@ -41,6 +42,12 @@ public class CompteService {
         return comptes;
     }
 
+    public List<Compte> getComptesByTypeClient(TypeClient typeClient)
+    {
+        List<Compte> comptes = compteRepository.findByTypeClient(typeClient);
+        return comptes;
+    }
+
     public Optional<Compte> getCompteById(UUID id)
     {
         Optional<Compte> compteOpt = compteRepository.findById(id);
@@ -53,8 +60,25 @@ public class CompteService {
     {
         Optional<Compte> compteOpt = compteRepository.findByTelephone(telephone);
         compteOpt.ifPresent(compte -> compte.setSolde(this.calculerSolde(compte)));
+        // System.out.println("Compte : " + compteOpt.get());
 
         return compteOpt;
+    }
+
+    public Optional<Compte> getCompteByCodeMarchand(String codeMarchand)
+    {
+        Optional<Compte> compteOpt = compteRepository.findByCodeMarchand(codeMarchand);
+        compteOpt.ifPresent(compte -> compte.setSolde(this.calculerSolde(compte)));
+
+        return compteOpt;
+    }
+
+    public Boolean existsByTelephone(String telephone)
+    {
+        if (compteRepository.existsByTelephone(telephone)) {
+            throw new RuntimeException("Ce numéro de téléphone n'a pas de compte Orange Money!");
+        }
+        return true;
     }
 
     @Transactional
@@ -101,6 +125,7 @@ public class CompteService {
                 solde -= transaction.getMontant();
             }
         }
+
         compte.setSolde(solde);
         return solde;
     }

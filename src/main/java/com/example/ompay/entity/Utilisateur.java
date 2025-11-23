@@ -1,11 +1,12 @@
 package com.example.ompay.entity;
 
-import jakarta.persistence.*; 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.util.UUID;
 import java.util.List;
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * Represents a user entity in the system.
@@ -15,6 +16,7 @@ import lombok.Data;
  */
 
 @Data
+@ToString(exclude = "comptes")
 @Entity
 @Table(name="utilisateurs")
 public class Utilisateur {
@@ -176,5 +178,19 @@ public class Utilisateur {
     //  * @param dateCreation The creation timestamp to set
     //  */
     // public void setDateCreation(LocalDateTime dateCreation) { this.dateCreation = dateCreation; }
+
+    @Override
+    public String toString() {
+        return "Utilisateur{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", email='" + email + '\'' +
+                ", cin='" + cin + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", dateDeNaissance=" + dateDeNaissance +
+                ", dateCreation=" + dateCreation +
+                '}';
+    }
 
 }

@@ -12,7 +12,7 @@ COPY .mvn .mvn
 RUN chmod +x ./mvnw
 
 # Télécharger les dépendances
-RUN ./mvnw dependency:go-offline -B
+# RUN ./mvnw dependency:go-offline -B
 
 # Copier le code source
 COPY src ./src

@@ -1,4 +1,4 @@
-package com.example.ompay.exception;
+package com.example.ompay.config.handler.exception;
 
 import com.example.ompay.dto.response.ApiResponse;
 import com.example.ompay.utils.ResponseHandler;

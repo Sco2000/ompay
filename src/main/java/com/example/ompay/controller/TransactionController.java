@@ -1,41 +1,63 @@
 package com.example.ompay.controller;
 
+import com.example.ompay.dto.request.PaiementRequestDTO;
+import com.example.ompay.dto.request.TransfertRequestDTO;
+import com.example.ompay.dto.response.TranfertResponseDTO;
+import com.example.ompay.dto.response.ApiResponse;
+import com.example.ompay.entity.Compte;
 import com.example.ompay.entity.Transaction;
+import com.example.ompay.mapper.TransfertMapper;
 import com.example.ompay.service.TransactionService;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
-@RequestMapping("api/transactions")
-public class TransactionController 
+@RequestMapping("/api/transactions")
+public class TransactionController
 {
     private final TransactionService transactionService;
+    private final TransfertMapper transfertMapper;
 
-    public TransactionController(TransactionService transactionService)
+    public TransactionController(TransactionService transactionService, TransfertMapper transfertMapper)
     {
         this.transactionService = transactionService;
+        this.transfertMapper = transfertMapper;
     }
 
     @GetMapping
-    public List<Transaction> getAllTransactions()
+    public ApiResponse<?> getAllTransactions(@AuthenticationPrincipal Compte compteConnecte)
     {
-        return transactionService.getAllTransactions();
+        try {
+            List<TranfertResponseDTO> responses = transactionService.getTransactionsByCompte(compteConnecte);
+            return ApiResponse.success("Transactions récupérées avec succès", responses);
+        } catch (RuntimeException e) {
+            return ApiResponse.error(e.getMessage());
+        }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Transaction> geTransactionById(@PathVariable UUID id)
+    @PostMapping("/transfert")
+    public ApiResponse<?> createTransfertTransaction( @RequestBody TransfertRequestDTO dtoTransaction, @AuthenticationPrincipal Compte compteConnecte)
     {
-        return transactionService.getTransactionsById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        try {
+            Transaction transaction = transactionService.createTransfertTransaction(dtoTransaction, compteConnecte);
+            TranfertResponseDTO response = transfertMapper.toResponseDTO(transaction);
+            return ApiResponse.success("Transfert effectué avec succès", response);
+        } catch (RuntimeException e) {
+            return ApiResponse.error(e.getMessage());
+        }
     }
 
-    @PostMapping
-    public Transaction createTransaction(@RequestBody Transaction transaction)
+    @PostMapping("/paiement")
+    public ApiResponse<?> createPaiementTransaction(@RequestBody PaiementRequestDTO dtoPaiement, @AuthenticationPrincipal Compte compteConnecte)
     {
-        return transactionService.createTransaction(transaction);
+        try {
+            Transaction transaction = transactionService.createPaiementTransaction(dtoPaiement, compteConnecte);
+            TranfertResponseDTO response = transfertMapper.toResponseDTO(transaction);
+            return ApiResponse.success("Paiement effectué avec succès", response);
+        } catch (RuntimeException e) {
+            return ApiResponse.error(e.getMessage());
+        }
     }
 }

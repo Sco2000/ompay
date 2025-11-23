@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = {UtilisateurMapper.class})
+@Mapper(componentModel = "spring", uses = {UtilisateurMapper.class, TransfertMapper.class})
 public interface CompteMapper {
 
     CompteMapper INSTANCE = Mappers.getMapper(CompteMapper.class);
@@ -28,5 +28,6 @@ public interface CompteMapper {
     @Mapping(target = "utilisateurId", source = "utilisateur.id")
     @Mapping(target = "prenom", source = "utilisateur.prenom")
     @Mapping(target = "nom", source = "utilisateur.nom")
+    @Mapping(target = "transactions", ignore = true)
     CompteResponseDTO toResponseDTO(Compte compte);
 }

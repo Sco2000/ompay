@@ -24,6 +24,34 @@ utilisateur:
 validation:
   error: "Validation error"
 
+transaction:
+  creation:
+    transfert_success: "Transfer completed successfully"
+    paiement_success: "Payment completed successfully"
+  retrieval:
+    list_success: "Transactions retrieved successfully"
+  validation:
+    destinataire_not_found: "Recipient account does not exist"
+    destinataire_not_found_paiement: "Recipient account does not exist"
+    self_transfer: "You cannot send money to yourself"
+    self_paiement: "You cannot make a payment to yourself"
+    insufficient_balance: "Your balance is insufficient!"
+    invalid_user_type: "Only a client or merchant can make a payment"
+    invalid_destinataire_type: "Payments can only be made to merchant accounts"
+
+auth:
+  otp:
+    sent_success: "OTP sent successfully"
+    valid: "OTP correct, you can now enter your PIN"
+    invalid: "OTP incorrect"
+  login:
+    success: "Login successful"
+    account_not_found: "Account not found"
+    invalid_pin: "Incorrect PIN!"
+    unauthenticated: "Unauthenticated user or invalid token"
+    unauthorized: "Permission denied"
+
 general:
   internal_error: "An internal error occurred"
   welcome: "Welcome to your Spring Boot API 🚀"
+  unauthorized: "User not authenticated"
