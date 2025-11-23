@@ -38,8 +38,8 @@ src/main/resources/application-test.yaml
 
 ### Environment Variables ###
 .env
-.deployment.yaml
-.service.yaml
+deployment.yaml
+service.yaml
 
 ### Logs ###
 *.log

@@ -1,5 +1,5 @@
-package com.example.ompay.entity;
+// package com.example.ompay.entity;
 
-public class Frais {
+// public class Frais {
     
-}
+// }
